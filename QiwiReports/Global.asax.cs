@@ -8,7 +8,6 @@ using System.Web.Routing;
 using System.Data.Entity;
 using QiwiReports.Models;
 
-
 namespace QiwiReports
 {
     // Note: For instructions on enabling IIS6 or IIS7 classic mode, 
@@ -22,7 +21,7 @@ namespace QiwiReports
             WebApiConfig.Register(GlobalConfiguration.Configuration);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            Database.SetInitializer(new LettersDbInitializer());
+            //Database.SetInitializer(new LettersDbInitializer());
         }
     }
 }

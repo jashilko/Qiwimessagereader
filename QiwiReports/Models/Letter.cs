@@ -5,7 +5,7 @@ using System.Web;
 
 namespace QiwiReports.Models
 {
-    public class Letter
+    public class Letter : IComparable, IEquatable<Letter>
     {
         public Letter(String[] spl)
         {
@@ -43,7 +43,53 @@ namespace QiwiReports.Models
         // Телефон. 
         public String account1 { get; set; }
 
- 
+
+/*
+
+        public int CompareTo(object obj)
+        {
+            Letter let_new = obj as Letter;
+            if (let_new.txn_id == this.txn_id)
+                return 0;
+            if (let_new.txn_id != this.txn_id)
+                return 1;
+            else
+                throw new NotImplementedException();
+        }
+ * */
+
+        public int CompareTo(object obj)
+        {
+            Letter let = obj as Letter;
+            if (let.txn_id == this.txn_id)
+                return 0;
+            else
+                return 1;
+
+        }
+
+        public bool Equals(Letter obj)
+        {
+            if (obj == null)
+                return false;
+            else
+                return obj.txn_id.Equals(this.txn_id);
+        }
+
+        public override bool Equals(object obj)
+        {
+            Letter let = obj as Letter;
+            if (obj == null)
+                return false;
+            else
+                return let.txn_id.Equals(this.txn_id);
+        }
+
+
+        public override int GetHashCode()
+        {
+            return this.txn_id.GetHashCode();
+        }
     }
 
     
