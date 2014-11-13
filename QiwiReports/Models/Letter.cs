@@ -16,6 +16,7 @@ namespace QiwiReports.Models
             this.trm_txn_id = spl[9];
             this.from_amount = Convert.ToDecimal(spl[11]);
             this.account1 = spl[13];
+            
         }
 
         public Letter()
@@ -43,6 +44,8 @@ namespace QiwiReports.Models
         // Телефон. 
         public String account1 { get; set; }
 
+        // Дата принятия почты
+        public DateTime dateReceive { get; set; }
 
 /*
 

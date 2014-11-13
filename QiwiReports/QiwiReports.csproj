@@ -118,6 +118,15 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201411101352526_InitialCreate.cs" />
+    <Compile Include="Migrations\201411101352526_InitialCreate.Designer.cs">
+      <DependentUpon>201411101352526_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201411131356176_AddLetterDateR.cs" />
+    <Compile Include="Migrations\201411131356176_AddLetterDateR.Designer.cs">
+      <DependentUpon>201411131356176_AddLetterDateR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Letter.cs" />
     <Compile Include="Models\LetterContext.cs" />
     <Compile Include="Models\LettersDbInitializer.cs" />
@@ -240,6 +249,14 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\Shared\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201411101352526_InitialCreate.resx">
+      <DependentUpon>201411101352526_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411131356176_AddLetterDateR.resx">
+      <DependentUpon>201411131356176_AddLetterDateR.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
