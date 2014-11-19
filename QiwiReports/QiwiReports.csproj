@@ -126,6 +126,10 @@
     <Compile Include="Migrations\201411131356176_AddLetterDateR.Designer.cs">
       <DependentUpon>201411131356176_AddLetterDateR.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201411171402533_AddLetterIsComplete.cs" />
+    <Compile Include="Migrations\201411171402533_AddLetterIsComplete.Designer.cs">
+      <DependentUpon>201411171402533_AddLetterIsComplete.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Letter.cs" />
     <Compile Include="Models\LetterContext.cs" />
@@ -256,6 +260,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201411131356176_AddLetterDateR.resx">
       <DependentUpon>201411131356176_AddLetterDateR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201411171402533_AddLetterIsComplete.resx">
+      <DependentUpon>201411171402533_AddLetterIsComplete.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

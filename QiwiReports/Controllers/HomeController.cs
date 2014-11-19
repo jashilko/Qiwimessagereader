@@ -9,42 +9,14 @@ using OpenPop.Pop3;
 using OpenPop.Mime;
 using OpenPop.Mime.Header;
 using System.Globalization;
+using System.Collections;
+using Newtonsoft.Json.Converters;
+
 
 
 namespace QiwiReports.Controllers
 {
-    /*
-    public class HomeController : Controller
-    {
-
-        public ActionResult Index()
-        {
-            // получаем из бд все объекты Book
-           
-            // передаем все полученный объекты в динамическое свойство Books в ViewBag
-            ViewBag.Letters = letters;
-            // возвращаем представление
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult Buy(int id)
-        {
-            ViewBag.LetterId = id;
-            return View();
-        }
-        [HttpPost]
-        public string Buy(Letter letter)
-        {
-            letter.Date = DateTime.Now;
-            // добавляем информацию о покупке в базу данных
-            db.Purchases.Add(purchase);
-            // сохраняем в бд все изменения
-            db.SaveChanges();
-            return "Спасибо, за покупку!";
-        }
-
-*/
+  
     public class HomeController : Controller
     {
         // создаем контекст данных
@@ -63,15 +35,6 @@ namespace QiwiReports.Controllers
             }
                 return true;
         }
-        /*
-        static HomeController()
-        {
-            books.Add(new Book { Id = 1, Name = "Война и мир", Author = "Л. Толстой", Year = 1863, Price = 220 });
-            books.Add(new Book { Id = 2, Name = "Отцы и дети", Author = "И. Тургенев", Year = 1862, Price = 195 });
-            books.Add(new Book { Id = 3, Name = "Чайка", Author = "А. Чехов", Year = 1895, Price = 158 });
-            books.Add(new Book { Id = 4, Name = "Подросток", Author = "Ф. Достоевский", Year = 1875, Price = 210 });
-        }
-        */
 
         public ActionResult Index()
         {
@@ -97,7 +60,7 @@ namespace QiwiReports.Controllers
                 MessageHeader headers = pop3Client.GetMessageHeaders(i);
                 DateTime ndt = DateTime.Parse(headers.Date.Substring(0, 25));
                 
-                if (ndt > DateTime.Today.AddDays(-1))
+                if (ndt > DateTime.Today.AddDays(-60))
                 {
 
                     Message message = pop3Client.GetMessage(i);
@@ -106,9 +69,12 @@ namespace QiwiReports.Controllers
                     {
                         mesBody = messagePart.BodyEncoding.GetString(messagePart.Body);
                         string[] stringSeparators = new string[] { "\r\n", "= " };
-                        string[] split = mesBody.Split(stringSeparators, StringSplitOptions.None);
+                        string[] split = (mesBody.Split(stringSeparators, StringSplitOptions.None));
+                        ArrayList ss = new ArrayList(split);
+                        ss.Add(ndt);
+
                         // Создаем новый класс письма. 
-                        Letter nlet = new Letter(split);
+                        Letter nlet = new Letter(ss);
                         if (db.Letters.ToList().Contains(nlet) == false)
                         {
                             // Проверяем, не содержится ли он уже
@@ -122,6 +88,7 @@ namespace QiwiReports.Controllers
 
         public string GetData()
         {
+            //return JsonConvert.SerializeObject(letters, Formatting.Indented);
             return JsonConvert.SerializeObject(letters);
             //return null;
         }

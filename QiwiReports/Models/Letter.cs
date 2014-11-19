@@ -2,21 +2,26 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Collections;
+using Newtonsoft.Json.Converters;
+using Newtonsoft.Json;
 
 namespace QiwiReports.Models
 {
+
     public class Letter : IComparable, IEquatable<Letter>
     {
-        public Letter(String[] spl)
+        public Letter(ArrayList spl)
         {
-            this.txn_id = spl[1];
-            this.account = spl[3];
+            this.txn_id = (String)spl[1];
+            this.account = (String)spl[3];
             this.amount = Convert.ToDecimal(spl[5]);
-            this.trm_id = spl[7];
-            this.trm_txn_id = spl[9];
+            this.trm_id = (String)spl[7];
+            this.trm_txn_id = (String)spl[9];
             this.from_amount = Convert.ToDecimal(spl[11]);
-            this.account1 = spl[13];
-            
+            this.account1 = (String)spl[13];
+            DateTime ss = (DateTime)spl[14];
+            this.dateReceive = ss;
         }
 
         public Letter()
@@ -46,6 +51,9 @@ namespace QiwiReports.Models
 
         // Дата принятия почты
         public DateTime dateReceive { get; set; }
+
+        // Обработано.
+        public Boolean IsComplete { get; set; }
 
 /*
 

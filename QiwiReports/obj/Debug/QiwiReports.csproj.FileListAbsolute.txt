@@ -81,3 +81,7 @@ C:\Kostya\QiwiReportsReader\QiwiReports\obj\Debug\QiwiReports.csprojResolveAssem
 C:\Kostya\QiwiReportsReader\QiwiReports\obj\Debug\QiwiReports.dll
 C:\Kostya\QiwiReportsReader\QiwiReports\obj\Debug\QiwiReports.pdb
 C:\Kostya\QiwiReportsReader\QiwiReports\bin\OpenPop.dll
+C:\Kostya\QiwiReportsReader\QiwiReports\obj\Debug\QiwiReports.Migrations.InitialCreate.resources
+C:\Kostya\QiwiReportsReader\QiwiReports\obj\Debug\QiwiReports.csproj.GenerateResource.Cache
+C:\Kostya\QiwiReportsReader\QiwiReports\obj\Debug\QiwiReports.Migrations.AddLetterDateR.resources
+C:\Kostya\QiwiReportsReader\QiwiReports\obj\Debug\QiwiReports.Migrations.AddLetterIsComplete.resources
