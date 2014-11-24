@@ -86,10 +86,15 @@ namespace QiwiReports.Controllers
             }
         }
 
-        public string GetData()
+      
+        
+          
+      
+        public string GetData(Boolean _search)
         {
+                return JsonConvert.SerializeObject(letters);
             //return JsonConvert.SerializeObject(letters, Formatting.Indented);
-            return JsonConvert.SerializeObject(letters);
+               
             //return null;
         }
     }
