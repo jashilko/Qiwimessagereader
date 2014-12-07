@@ -5,6 +5,7 @@ using System.Web;
 using System.Collections;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json;
+using System.Globalization;
 
 namespace QiwiReports.Models
 {
@@ -13,15 +14,17 @@ namespace QiwiReports.Models
     {
         public Letter(ArrayList spl)
         {
+            
             this.txn_id = (String)spl[1];
             this.account = (String)spl[3];
-            this.amount = Convert.ToDecimal(spl[5]);
+            this.amount = Convert.ToDecimal(spl[5], CultureInfo.InvariantCulture);
             this.trm_id = (String)spl[7];
             this.trm_txn_id = (String)spl[9];
-            this.from_amount = Convert.ToDecimal(spl[11]);
+            this.from_amount = Convert.ToDecimal(spl[11], CultureInfo.InvariantCulture);
             this.account1 = (String)spl[13];
             DateTime ss = (DateTime)spl[14];
             this.dateReceive = ss;
+            
         }
 
         public Letter()

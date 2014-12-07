@@ -61,8 +61,6 @@ C:\Kostya\QiwiReportsReader\QiwiReports\bin\System.Web.WebPages.Razor.dll
 C:\Kostya\QiwiReportsReader\QiwiReports\bin\EntityFramework.xml
 C:\Kostya\QiwiReportsReader\QiwiReports\bin\EntityFramework.SqlServer.xml
 C:\Kostya\QiwiReportsReader\QiwiReports\bin\Newtonsoft.Json.xml
-C:\Kostya\QiwiReportsReader\QiwiReports\bin\System.Net.Http.xml
-C:\Kostya\QiwiReportsReader\QiwiReports\bin\System.Net.Http.WebRequest.xml
 C:\Kostya\QiwiReportsReader\QiwiReports\bin\System.Web.Helpers.xml
 C:\Kostya\QiwiReportsReader\QiwiReports\bin\System.Web.Mvc.xml
 C:\Kostya\QiwiReportsReader\QiwiReports\bin\System.Web.Razor.xml

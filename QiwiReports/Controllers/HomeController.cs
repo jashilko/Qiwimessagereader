@@ -62,7 +62,7 @@ namespace QiwiReports.Controllers
                 MessageHeader headers = pop3Client.GetMessageHeaders(i);
                 DateTime ndt = DateTime.Parse(headers.Date.Substring(0, 25));
                 
-                if (ndt > DateTime.Today.AddDays(-60))
+                if (ndt > DateTime.Today.AddDays(-1))
                 {
 
                     Message message = pop3Client.GetMessage(i);
