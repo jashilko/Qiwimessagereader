@@ -11,6 +11,8 @@ using OpenPop.Mime.Header;
 using System.Globalization;
 using System.Collections;
 using Newtonsoft.Json.Converters;
+using System.Data.Entity;
+
 
 
 
@@ -86,16 +88,28 @@ namespace QiwiReports.Controllers
             }
         }
 
-      
-        
-          
+
+        [HttpPost]
+        public ActionResult Edit(List<String> name)
+        {
+            Newtonsoft.Json.Linq.JArray arr = (Newtonsoft.Json.Linq.JArray)JsonConvert.DeserializeObject(name[0]);
+            for (int i = 0; i < arr.Count; i++)
+            {
+               int qq = arr.Value<int>(i);
+               Letter oldlet = db.Letters.Find(qq);
+               db.Entry(oldlet).State = EntityState.Modified;
+               oldlet.IsComplete = true;
+               UpdateModel(oldlet);
+               db.SaveChanges();
+            }
+
+             return null;
+             
+         }
       
         public string GetData(Boolean _search)
         {
-                return JsonConvert.SerializeObject(letters);
-            //return JsonConvert.SerializeObject(letters, Formatting.Indented);
-               
-            //return null;
+            return JsonConvert.SerializeObject(letters);
         }
     }
 
