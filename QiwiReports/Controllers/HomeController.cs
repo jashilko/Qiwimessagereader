@@ -41,7 +41,7 @@ namespace QiwiReports.Controllers
         public ActionResult Index()
         {
             db = new LetterContext();
-            CheckData(db);
+            //CheckData(db);
             letters = db.Letters;
             return View();
         }
