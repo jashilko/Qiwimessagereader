@@ -1,0 +1,36 @@
+﻿@model QiwiReports.Models.User
+ 
+@{
+    ViewBag.Title = "Логин";
+}
+ 
+<hgroup class="title">
+    <h1>@ViewBag.Title.</h1>
+</hgroup>
+ 
+<section id="loginForm">
+<h2>Вход с помочью учетной записи</h2>
+@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+ 
+    <fieldset>
+        <ol>
+            <li>
+                @Html.LabelFor(m => m.Name)
+                @Html.TextBoxFor(m => m.Name)
+                @Html.ValidationMessageFor(m => m.Name)
+            </li>
+            <li>
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password)
+                @Html.ValidationMessageFor(m => m.Password)
+            </li>
+        </ol>
+        <input type="submit" value="Войти" />
+    </fieldset>
+    <p>
+        @Html.ActionLink("Регистрация", "Register") 
+    </p>
+}
+</section>

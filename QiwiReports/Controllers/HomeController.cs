@@ -18,7 +18,7 @@ using System.Data.Entity;
 
 namespace QiwiReports.Controllers
 {
-  
+    
     public class HomeController : Controller
     {
         // создаем контекст данных
@@ -38,10 +38,11 @@ namespace QiwiReports.Controllers
                 return true;
         }
 
+        [Authorize]
         public ActionResult Index()
         {
             db = new LetterContext();
-            //CheckData(db);
+            CheckData(db);
             letters = db.Letters;
             return View();
         }
@@ -53,30 +54,35 @@ namespace QiwiReports.Controllers
             pop3Client.Connect("pop.mail.ru", 995, true);
             pop3Client.Authenticate("spkristall@mail.ru", "kristall77", OpenPop.Pop3.AuthenticationMethod.UsernameAndPassword);
 
+            // Получаем максимальную дату записи в БД. 
+            DateTime MaxTime = db.Letters.Max(w => w.dateReceive);
+
             int count = pop3Client.GetMessageCount();
             //DataTable dtMessages = new DataTable();
             String mesBody;
             
-            for (int i = count; i >= 1; i--)
+            for (int i = count; i > 0; i--)
             {
                 MessageHeader headers = pop3Client.GetMessageHeaders(i);
-                DateTime ndt = DateTime.Parse(headers.Date.Substring(0, 25));
-                
-                if (ndt > DateTime.Today.AddDays(-1))
-                {
+                DateTime datePost = DateTime.Parse(headers.DateSent.ToString());
+                datePost = datePost.AddHours(3);
 
+                if (datePost > MaxTime)
+                {
                     Message message = pop3Client.GetMessage(i);
                     MessagePart messagePart = message.FindFirstPlainTextVersion();
                     if (messagePart != null)
                     {
+
                         mesBody = messagePart.BodyEncoding.GetString(messagePart.Body);
                         string[] stringSeparators = new string[] { "\r\n", "= " };
                         string[] split = (mesBody.Split(stringSeparators, StringSplitOptions.None));
                         ArrayList ss = new ArrayList(split);
-                        ss.Add(ndt);
+                        ss.Add(datePost);
 
                         // Создаем новый класс письма. 
                         Letter nlet = new Letter(ss);
+                        //if (db.Letters.Where(x => x.txn_id.ToString() == (String)ss[1]).ToList().Count == 0)
                         if (db.Letters.ToList().Contains(nlet) == false)
                         {
                             // Проверяем, не содержится ли он уже
@@ -84,6 +90,10 @@ namespace QiwiReports.Controllers
                             db.SaveChanges();
                         }
                     }
+                }
+                else
+                {
+                    break;
                 }
             }
         }

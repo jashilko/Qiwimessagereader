@@ -83,3 +83,6 @@ C:\Kostya\QiwiReportsReader\QiwiReports\obj\Debug\QiwiReports.Migrations.Initial
 C:\Kostya\QiwiReportsReader\QiwiReports\obj\Debug\QiwiReports.csproj.GenerateResource.Cache
 C:\Kostya\QiwiReportsReader\QiwiReports\obj\Debug\QiwiReports.Migrations.AddLetterDateR.resources
 C:\Kostya\QiwiReportsReader\QiwiReports\obj\Debug\QiwiReports.Migrations.AddLetterIsComplete.resources
+C:\Kostya\QiwiReportsReader\QiwiReports\bin\System.Web.Providers.dll
+C:\Kostya\QiwiReportsReader\QiwiReports\bin\System.Web.Providers.xml
+C:\Kostya\QiwiReportsReader\QiwiReports\obj\Debug\QiwiReports.Migrations.AddBlogUrl.resources
