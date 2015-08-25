@@ -16,8 +16,6 @@ namespace QiwiReports.Models
 
         protected override void Seed(LetterContext db)
         {
-            
-
         }
     }
 }

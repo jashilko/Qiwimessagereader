@@ -14,7 +14,6 @@ namespace QiwiReports.Models
     {
         public Letter(ArrayList spl)
         {
-            
             this.txn_id = (String)spl[1];
             this.account = (String)spl[3];
             this.amount = Convert.ToDecimal(spl[5], CultureInfo.InvariantCulture);
@@ -24,7 +23,6 @@ namespace QiwiReports.Models
             this.account1 = (String)spl[13];
             DateTime ss = (DateTime)spl[14];
             this.dateReceive = ss;
-            
         }
 
         public Letter()

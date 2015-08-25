@@ -1,36 +1,35 @@
 ﻿@model QiwiReports.Models.User
- 
+
 @{
-    ViewBag.Title = "Логин";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
- 
-<hgroup class="title">
-    <h1>@ViewBag.Title.</h1>
-</hgroup>
- 
-<section id="loginForm">
-<h2>Вход с помочью учетной записи</h2>
-@using (Html.BeginForm(new { ReturnUrl = ViewBag.ReturnUrl })) {
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
- 
-    <fieldset>
-        <ol>
-            <li>
-                @Html.LabelFor(m => m.Name)
-                @Html.TextBoxFor(m => m.Name)
-                @Html.ValidationMessageFor(m => m.Name)
-            </li>
-            <li>
-                @Html.LabelFor(m => m.Password)
-                @Html.PasswordFor(m => m.Password)
-                @Html.ValidationMessageFor(m => m.Password)
-            </li>
-        </ol>
-        <input type="submit" value="Войти" />
-    </fieldset>
-    <p>
-        @Html.ActionLink("Регистрация", "Register") 
-    </p>
+
+@using (Html.BeginForm("Login", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <h4>Вход пользователя.</h4>
+    <hr />
+    @Html.ValidationSummary()
+    <div class="form-group">
+        @Html.LabelFor(m => m.Name, "Логин", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(m => m.Password, "Пароль", new { @class = "col-md-2 control-label" })
+        <div class="col-md-10">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" class="btn btn-default" value="Войти" />
+        </div>
+    </div>
+    
+
+    
+
+
 }
-</section>

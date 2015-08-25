@@ -86,3 +86,11 @@ C:\Kostya\QiwiReportsReader\QiwiReports\obj\Debug\QiwiReports.Migrations.AddLett
 C:\Kostya\QiwiReportsReader\QiwiReports\bin\System.Web.Providers.dll
 C:\Kostya\QiwiReportsReader\QiwiReports\bin\System.Web.Providers.xml
 C:\Kostya\QiwiReportsReader\QiwiReports\obj\Debug\QiwiReports.Migrations.AddBlogUrl.resources
+C:\Kostya\QiwiReportsReader\QiwiReports\bin\ru\System.Web.Http.WebHost.resources.dll
+C:\Kostya\QiwiReportsReader\QiwiReports\bin\ru\System.Web.Http.SelfHost.resources.dll
+C:\Kostya\QiwiReportsReader\QiwiReports\bin\ru\System.Web.Http.resources.dll
+C:\Kostya\QiwiReportsReader\QiwiReports\bin\ru\System.Net.Http.Formatting.resources.dll
+C:\Kostya\QiwiReportsReader\QiwiReports\bin\System.Web.Http.WebHost.dll
+C:\Kostya\QiwiReportsReader\QiwiReports\bin\System.Web.Http.SelfHost.dll
+C:\Kostya\QiwiReportsReader\QiwiReports\bin\System.Web.Http.dll
+C:\Kostya\QiwiReportsReader\QiwiReports\bin\System.Net.Http.Formatting.dll

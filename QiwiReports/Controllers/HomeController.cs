@@ -12,19 +12,19 @@ using System.Globalization;
 using System.Collections;
 using Newtonsoft.Json.Converters;
 using System.Data.Entity;
-
-
+using System.Threading.Tasks;
 
 
 namespace QiwiReports.Controllers
 {
     
-    public class HomeController : Controller
+    public class HomeController : AsyncController
     {
         // создаем контекст данных
 
         static IEnumerable<Letter> letters;
-        static LetterContext db;
+
+        static LetterContext db = new LetterContext();
 
         private Boolean ChechExists(String[] split)
         {
@@ -38,6 +38,7 @@ namespace QiwiReports.Controllers
                 return true;
         }
 
+        /*
         [Authorize]
         public ActionResult Index()
         {
@@ -46,14 +47,29 @@ namespace QiwiReports.Controllers
             letters = db.Letters;
             return View();
         }
+         * */
 
-        private void CheckData(LetterContext db)
+        [Authorize]
+        public async Task<ActionResult> Index()
+        {
+            db = new LetterContext();
+            await Task.Run(() =>
+                {
+                    CheckData(db);
+                    letters = db.Letters;
+                });
+            return View("Index");
+        }
+
+
+        public void CheckData(LetterContext db)
         {
             Pop3Client pop3Client;
-            pop3Client = new Pop3Client();
-            pop3Client.Connect("pop.mail.ru", 995, true);
-            pop3Client.Authenticate("spkristall@mail.ru", "kristall77", OpenPop.Pop3.AuthenticationMethod.UsernameAndPassword);
-
+            try 
+            {
+                pop3Client = new Pop3Client();
+                pop3Client.Connect("pop.mail.ru", 995, true);
+                pop3Client.Authenticate("spkristall@mail.ru", "castell05", OpenPop.Pop3.AuthenticationMethod.UsernameAndPassword);
             // Получаем максимальную дату записи в БД. 
             DateTime MaxTime = db.Letters.Max(w => w.dateReceive);
 
@@ -73,21 +89,25 @@ namespace QiwiReports.Controllers
                     MessagePart messagePart = message.FindFirstPlainTextVersion();
                     if (messagePart != null)
                     {
-
                         mesBody = messagePart.BodyEncoding.GetString(messagePart.Body);
                         string[] stringSeparators = new string[] { "\r\n", "= " };
                         string[] split = (mesBody.Split(stringSeparators, StringSplitOptions.None));
                         ArrayList ss = new ArrayList(split);
                         ss.Add(datePost);
 
-                        // Создаем новый класс письма. 
-                        Letter nlet = new Letter(ss);
-                        //if (db.Letters.Where(x => x.txn_id.ToString() == (String)ss[1]).ToList().Count == 0)
-                        if (db.Letters.ToList().Contains(nlet) == false)
+                        // Проверяем, является ли номер чистом
+                        long qw;
+                        if (long.TryParse(ss[1].ToString(), out qw) && ss[1].ToString().Length == 14)
                         {
-                            // Проверяем, не содержится ли он уже
-                            db.Letters.Add(nlet);
-                            db.SaveChanges();
+                            // Создаем новый класс письма. 
+                            Letter nlet = new Letter(ss);
+                            //if (db.Letters.Where(x => x.txn_id.ToString() == (String)ss[1]).ToList().Count == 0)
+                            if (db.Letters.ToList().Contains(nlet) == false)
+                            {
+                                // Проверяем, не содержится ли он уже
+                                db.Letters.Add(nlet);
+                                db.SaveChanges();
+                            }
                         }
                     }
                 }
@@ -96,6 +116,12 @@ namespace QiwiReports.Controllers
                     break;
                 }
             }
+            }
+            catch (Exception ex)
+            {
+                ;
+            }
+
         }
 
 
